@@ -1,0 +1,5 @@
+selenium
+pytest
+pytest-selenium
+pytest-variables
+pytest-xdist
