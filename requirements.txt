@@ -1,5 +1,8 @@
 selenium
 pytest
-pytest-selenium
-pytest-variables
 pytest-xdist
+pytest-selenium
+pytest-html
+pytest-base-url
+pytest-variables
+pytest-splinter
