@@ -1,4 +1,5 @@
 import pytest
+from selenium.webdriver import Remote
 
 
 @pytest.fixture
