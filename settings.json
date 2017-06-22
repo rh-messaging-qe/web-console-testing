@@ -1,4 +1,4 @@
-{
-  "username": "admin",
-  "password": "admin"
+{ "user": {
+    "username": "admin",
+    "password": "topsecret007" }
 }
