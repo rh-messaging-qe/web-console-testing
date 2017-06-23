@@ -1,15 +1,22 @@
 from pages.page import Page
+#from pages.regions.navigation import Navigation
+from pages.regions.menu import Menu
+#from pages.regions.notification import Notifications
+#from pages.regions.console import Console
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-
-"""from pages.regions.notification import Notification"""
+from selenium.webdriver import Remote
 
 
 class Base(Page):
-    def __init__(self, base_url, selenium, **kwargs):
+    def __init__(self, base_url, selenium: Remote, open_url=True, **kwargs):
         super(Base, self).__init__(base_url, selenium, **kwargs)
-        self.open()
-        self.menu = Base.Menu(base_url, selenium, **kwargs)
+        if open_url:
+            self.open()
+        else:
+            self.wait_for_page_to_load()
+        self.wait_for_angular()
 
     @property
     def page_title(self):
