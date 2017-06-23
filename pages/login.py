@@ -13,16 +13,22 @@ class LoginPage(Base):
 
     __forbidden_msg = 'Failed to log in, Forbidden'
 
-    def click_login(self):
-        self.wait_for_element_displayed(*self.__login_button_locator).click()
+    def __init__(self, base_url, selenium, open_url=True):
+        """Creates a new instance of the class and gets the page ready for testing."""
+        Base.__init__(self, base_url, selenium, open_url)
 
-    def type_username(self, username):
+    def __click_login(self):
+        self.wait_for_element_displayed(*self.__login_button_locator).click()
+        from pages.welcome import WelcomePage
+        return WelcomePage(self.base_url, self.selenium, open_url=False)
+
+    def __type_username(self, username):
         self.wait_for_element_displayed(*self.__username_locator).send_keys(username)
 
-    def type_password(self, password):
+    def __type_password(self, password):
         self.wait_for_element_displayed(*self.__password_locator).send_keys(password)
 
-    def check_remember_me(self):
+    def __check_remember_me(self):
         self.wait_for_element_displayed(*self.__remember_me_check_locator).click()
 
     def login(self, username, password, remember=False):
@@ -33,12 +39,18 @@ class LoginPage(Base):
         @param remember: Check remember
         @return:
         """
-        self.type_username(username)
-        self.type_password(password)
+        self.__type_username(username)
+        self.__type_password(password)
         if remember:
-            self.check_remember_me()
-        self.click_login()
+            self.__check_remember_me()
+        login = self.__click_login()
+        return login
 
     @property
     def is_forbidden(self):
-        return True if self.__forbidden_msg in self.notification_text else False
+        """
+        Check if login was forbidden
+        @return: Boolean
+        """
+        return self.__forbidden_msg in self.notification
+
