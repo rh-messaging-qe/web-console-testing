@@ -6,9 +6,9 @@ class LoginPage(Base):
     """HawtIO login page"""
     _url = '{base_url}/login'
 
-    __username_locator = (By.CSS_SELECTOR, '#username.ng-dirty.input-medium.ng-invalid.ng-invalid-required')
-    __password_locator = (By.CSS_SELECTOR, '#password.ng-dirty.input-medium.ng-invalid.ng-invalid-required')
-    __login_button_locator = (By.CSS_SELECTOR, 'button.btn.btn-success')
+    __username_locator = (By.ID, 'username')
+    __password_locator = (By.ID, 'password')
+    __login_button_locator = (By.CLASS_NAME, 'btn-success')
     __remember_me_check_locator = (By.ID, 'rememberMe')
 
     __forbidden_msg = 'Failed to log in, Forbidden'
