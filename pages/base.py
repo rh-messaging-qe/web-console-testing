@@ -26,6 +26,19 @@ class Base(Page):
         )
         return self.selenium.title
 
+    def wait_for_angular(self):
+        """
+        Wait until the page is done with AngularJS render page
+        @return:
+        """
+        # waitForAngular()
+        # https://github.com/angular/protractor/blob/71532f055c720b533fbf9dab2b3100b657966da6/lib/clientsidescripts.js
+        script_wait = """callback = arguments[arguments.length - 1];
+           angular.element('body').injector().get('$browser').notifyWhenNoOutstandingRequests(callback);"""
+
+        self.selenium.set_script_timeout(self.timeout)
+        self.selenium.execute_async_script(script=script_wait)
+        return self
     @property
     def logged(self):
         """
