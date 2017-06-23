@@ -29,12 +29,13 @@ class Base(Page):
         return False if self.is_element_present(__login_button_locator) else True
 
     @property
-    def notification_text(self):
+    def notification(self):
         """
         Wait for notification and get back text
         @todo Implement model for notifications regions/notifications.py
         @return:
         """
         __message_text_locator = (By.CLASS_NAME, 'toast-message')
-        return self.wait_for_element_displayed(*__message_text_locator).text
-
+        #return self.wait_for_element_displayed(*__message_text_locator).text
+        text = self.selenium.find_element(*__message_text_locator).text
+        return text
