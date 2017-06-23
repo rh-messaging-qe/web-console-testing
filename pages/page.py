@@ -32,19 +32,17 @@ class Page(object):
         self.selenium.get(url)
 
     def get_url_current_page(self):
-        self.wait_for_angular()
         return self.selenium.current_url
 
     def open(self):
         """Open page"""
         self.selenium.get(self.url)
         self.wait_for_page_to_load()
-        self.wait_for_angular()
         return self
 
     def wait_for_page_to_load(self):
         """Wait until the page is loaded."""
-        self.wait.until(lambda s: self.url in s.current_url)
+        self.wait.until(lambda s: self.is_page_loaded())
         return self
 
     @property
