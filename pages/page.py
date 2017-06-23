@@ -47,6 +47,9 @@ class Page(object):
         self.wait.until(lambda s: self.url in s.current_url)
         return self
 
+    @property
+    def is_the_current_page(self):
+        return self.url in self.get_url_current_page()
 
     def wait_for_element_presented(self, *locator):
         self.wait.until(lambda s: self.is_element_present(*locator))
