@@ -39,6 +39,7 @@ class Base(Page):
         self.selenium.set_script_timeout(self.timeout)
         self.selenium.execute_async_script(script=script_wait)
         return self
+
     @property
     def logged(self):
         """
