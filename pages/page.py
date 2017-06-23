@@ -84,6 +84,22 @@ class Page(object):
             # set back to where you once belonged
             self.selenium.implicitly_wait(self.timeout)
 
+    def is_not_element_present(self, *locator, timeout=0):
+        """
+        Check if the element is not present on page.
+        @param locator:
+        @return: bool
+        """
+        self.selenium.implicitly_wait(timeout)
+        try:
+            self.selenium.find_element(*locator)
+            return False
+        except NoSuchElementException:
+            return True
+        finally:
+            # set back to where you once belonged
+            self.selenium.implicitly_wait(self.timeout)
+
     def is_element_visible(self, *locator):
         """
         Check if the element is visible on page.
