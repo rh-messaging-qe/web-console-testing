@@ -46,7 +46,7 @@ class Base(Page):
         @return: bool
         """
         __login_button_locator = (By.CSS_SELECTOR, 'button.btn.btn-success')
-        return False if self.is_element_present(__login_button_locator) else True
+        return self.is_not_element_present(__login_button_locator)
 
     @property
     def notification(self):
