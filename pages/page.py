@@ -116,6 +116,18 @@ class Page(object):
             # set back to where you once belonged
             self.selenium.implicitly_wait(self.timeout)
 
+    def is_not_element_visible(self, *locator):
+        """
+        Check if the element is not visible on page.
+        @param locator:
+        @return: bool
+        """
+        try:
+            self.selenium.find_element(*locator).is_displayed()
+            return False
+        except (NoSuchElementException, ElementNotVisibleException):
+            return True
+
     def go_back(self):
         """
         Get back in history.
