@@ -10,7 +10,7 @@ class Page(object):
     """
     _url = None
 
-    def __init__(self, base_url, selenium: Remote, **kwargs):
+    def __init__(self, base_url: str, selenium: Remote, **kwargs):
         """Page constructor"""
         self.base_url = base_url
         self.selenium = selenium
@@ -28,7 +28,7 @@ class Page(object):
             return self._url.format(base_url=self.base_url, **self.kwargs)
         return self.base_url
 
-    def get_url(self, url):
+    def get_url(self, url: url):
         self.selenium.get(url)
 
     def get_url_current_page(self):
