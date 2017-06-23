@@ -58,13 +58,23 @@ class Page(object):
         self.wait.until(lambda s: self.is_element_visible(*locator))
         return self.selenium.find_element(*locator)
 
-    def is_element_present(self, *locator):
+    def is_page_loaded(self):
+        """
+        Check if the page is loaded
+        @param locator:
+        @return: bool
+        """
+        script = "complete" in self.selenium.execute_script("return document.readyState")
+        return script
+
+
+    def is_element_present(self, *locator, timeout=0):
         """
         Check if the element is present on page.
         @param locator:
         @return: bool
         """
-        self.selenium.implicitly_wait(0)
+        self.selenium.implicitly_wait(timeout)
         try:
             self.selenium.find_element(*locator)
             return True
