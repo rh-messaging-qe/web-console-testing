@@ -106,15 +106,11 @@ class Page(object):
         @param locator:
         @return: bool
         """
-        self.selenium.implicitly_wait(0)
         try:
             self.selenium.find_element(*locator).is_displayed()
             return True
         except (NoSuchElementException, ElementNotVisibleException):
             return False
-        finally:
-            # set back to where you once belonged
-            self.selenium.implicitly_wait(self.timeout)
 
     def is_not_element_visible(self, *locator):
         """
